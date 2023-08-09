@@ -25,6 +25,43 @@ const colorList = {
   lavender:  { r: 200, g: 191, b: 231 },
 };
 
+const colorTerrainMap = {
+  black: 'road',
+  gray: 'pavement',
+  darkRed: 'lava',
+  red: 'lava',
+  orange: 'wall',
+  yellow: 'lemon',
+  green: 'grass',
+  blue: 'water',
+  darkBlue: 'deepWater',
+  purple: 'hotSpot',
+  white: 'empty',
+  lightGray: 'pavement',
+  brown: 'road',
+  lightPink: 'safeZone',
+  darkYellow: 'lemon',
+  beige: 'safeZone',
+  lime: 'lemon',
+  skyBlue: 'water',
+  steelBlue: 'water',
+  lavender: 'hotSpot',
+};
+
+// const terrainMap = {
+//   road: ['black', 'brown'],
+//   lemon: ['yellow', 'lime', 'darkYellow'],
+//   empty: ['white'],
+//   grass: ['green'],
+//   pavement: ['gray', 'lightGray'],
+//   hotSpot: ['purple', 'lavender'],
+//   wall: ['orange'],
+//   water: ['skyBlue', 'blue', 'steelBlue'],
+//   deepWater: ['darkBlue'],
+//   lava: ['red', 'darkRed'],
+//   safeZone: ['beige', 'lightPink'],
+// };
+
 const colorMatcher = nearestColor.from(colorList);
 
 export default async function handler(req, res) {
@@ -96,7 +133,7 @@ function getColorNames(imageData) {
     for (const tile of tilesRow) {
       const [r, g, b] = tile;
       const nearestColorName = colorMatcher({r, g, b}).name; // Get the nearest color name
-      colorNamesRow.push(nearestColorName);
+      colorNamesRow.push(colorTerrainMap[nearestColorName] || 'empty');
       // console.log('color: ', {r, g, b});
     }
     colorNames.push(colorNamesRow);
