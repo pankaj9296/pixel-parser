@@ -4,102 +4,102 @@ import nearestColor from 'nearest-color';
 const colorPalette = {
   black: {
     rgb: [0, 0, 0],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   gray: {
     rgb: [127, 127, 127],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   darkRed: {
     rgb: [136, 0, 21],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   red: {
-    rgb: [237, 28, 36],
-    distanceThreshold: 20,
+    rgb: [255, 0, 0],
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   orange: {
     rgb: [255, 127, 39],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   yellow: {
-    rgb: [255, 242, 0],
-    distanceThreshold: 20,
+    rgb: [255, 255, 0],
+    distanceThreshold: 150,
     priorityThreshold: 5,
   },
   green: {
-    rgb: [34, 177, 76],
-    distanceThreshold: 20,
+    rgb: [0, 255, 0],
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   blue: {
     rgb: [0, 162, 232],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   darkBlue: {
     rgb: [63, 72, 204],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   purple: {
     rgb: [163, 73, 164],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   white: {
     rgb: [255, 255, 255],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   lightGray: {
     rgb: [195, 195, 195],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   brown: {
     rgb: [185, 122, 87],
-    distanceThreshold: 20,
-    priorityThreshold: 0,
+    distanceThreshold: 150,
+    priorityThreshold: 5,
   },
   lightPink: {
     rgb: [255, 174, 201],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   darkYellow: {
     rgb: [255, 201, 14],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   beige: {
     rgb: [239, 228, 176],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   lime: {
     rgb: [181, 230, 29],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   skyBlue: {
     rgb: [153, 217, 234],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   steelBlue: {
     rgb: [112, 146, 190],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
   lavender: {
     rgb: [200, 191, 231],
-    distanceThreshold: 20,
+    distanceThreshold: 150,
     priorityThreshold: 0,
   },
 };
@@ -151,10 +151,10 @@ async function getMapTiles(mapUrl, tileSize) {
                 
                 const nearestColor = colorMatcher({r, g, b});
                 const nearestColorName = nearestColor.name;
-                console.log('color', r, g, b, nearestColor);
                 
-                tilePixels[nearestColorName] = (tilePixels[nearestColorName] || 0) + 1;
-                
+                if (!colorPalette[nearestColorName].distance || (colorPalette[nearestColorName].distance > nearestColor.distance)) {
+                  tilePixels[nearestColorName] = (tilePixels[nearestColorName] || 0) + 1;
+                }
               }
             }
           }
