@@ -136,8 +136,8 @@ export default async function handler(req, res) {
   
   try {
     const tiles = await getMapTiles(mapUrl, tileSize);
-    res.status(200).send(tiles);
-    // res.status(200).json(tiles);
+    // res.status(200).send(tiles);
+    res.status(200).json({response: JSON.stringify(tiles)});
   } catch (error) {
     console.error({ error: 'An error occurred while processing the image.', message: error.message, mapUrl });
     res.status(500).json({ error: 'An error occurred while processing the image.', message: error.message, mapUrl });
@@ -203,7 +203,7 @@ async function getMapTiles(mapUrl, tileSize) {
             }
           }
           const tileColor = colorMetThreshold || mostUsedColorInTile;
-          tiles.push(colors.indexOf(tileColor));
+          tiles.push(colors.indexOf(tileColor) + 1);
         }
       }
       resolve(tiles);
