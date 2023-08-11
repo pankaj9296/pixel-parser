@@ -152,8 +152,12 @@ async function getMapTiles(mapUrl, tileSize) {
         return;
       }
       
-      const width = pixels.shape[0];
-      const height = pixels.shape[1];
+      let width = pixels.shape[0];
+      let height = pixels.shape[1];
+      
+      width = width - width % tileSize;
+      height = height - height % tileSize;
+      
       const tiles = [];
       
       for (let y = 0; y < height; y += tileSize) {
