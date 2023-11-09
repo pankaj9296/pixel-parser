@@ -132,7 +132,7 @@ const colorMatcher = nearestColor.from(colorPaletteRgb);
 
 export default async function handler(req, res) {
   const { image: mapUrl } = req.query;
-  const tileSize = 32;
+  const tileSize = 8;
   
   try {
     const tiles = await getMapTiles(mapUrl, tileSize);
